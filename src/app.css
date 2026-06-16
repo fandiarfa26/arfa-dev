@@ -3,10 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-secondary: 16 185 129;
+    --color-background: 19 19 19;
+    --z-aurora: -1;
+    --z-nav: 40;
+    --z-overlay: 50;
+    --z-drawer: 60;
+    --z-skip-link: 70;
+    --z-cursor: 200;
+    --z-cursor-dot: var(--z-cursor);
+    --z-cursor-ring: calc(var(--z-cursor) - 1);
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-wrap: break-word;
   }
 
   body {

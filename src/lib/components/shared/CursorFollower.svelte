@@ -1,10 +1,13 @@
 <script lang="ts">
-  import gsap from 'gsap';
   import { onMount } from 'svelte';
 
   let dot: HTMLElement;
   let ring: HTMLElement;
   let enabled = $state(false);
+
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
 
   onMount(() => {
     const pointerMQ = window.matchMedia('(pointer: fine)');
@@ -15,19 +18,52 @@
 
     enabled = true;
 
+    let targetX = -9999;
+    let targetY = -9999;
+    let dotX = -9999;
+    let dotY = -9999;
+    let ringX = -9999;
+    let ringY = -9999;
+    let hovered = false;
+    let scale = 1;
+    let targetScale = 1;
+    let animId: number | null = null;
+
+    function tick() {
+      dotX = lerp(dotX, targetX, 0.15);
+      dotY = lerp(dotY, targetY, 0.15);
+      ringX = lerp(ringX, targetX, 0.08);
+      ringY = lerp(ringY, targetY, 0.08);
+      scale = lerp(scale, targetScale, 0.15);
+
+      dot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px) scale(${scale})`;
+
+      animId = requestAnimationFrame(tick);
+    }
+
     const onMove = (e: MouseEvent) => {
-      gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.1, ease: 'power2.out', overwrite: 'auto' });
-      gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (animId === null) animId = requestAnimationFrame(tick);
     };
 
     const onHoverStart = (e: Event) => {
       const target = (e.target as HTMLElement).closest('a, button, input, textarea, select, [data-cursor]');
-      if (target) gsap.to(ring, { scale: 1.5, borderColor: '#10b981', duration: 0.3, ease: 'power2.out' });
+      if (target && !hovered) {
+        hovered = true;
+        targetScale = 1.5;
+        ring.style.borderColor = 'rgb(var(--color-secondary))';
+      }
     };
 
     const onHoverEnd = (e: Event) => {
       const target = (e.target as HTMLElement).closest('a, button, input, textarea, select, [data-cursor]');
-      if (target) gsap.to(ring, { scale: 1, borderColor: 'rgba(16, 185, 129, 0.5)', duration: 0.3, ease: 'power2.out' });
+      if (target && hovered) {
+        hovered = false;
+        targetScale = 1;
+        ring.style.borderColor = 'rgb(var(--color-secondary))';
+      }
     };
 
     window.addEventListener('mousemove', onMove);
@@ -38,6 +74,7 @@
       window.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseover', onHoverStart);
       document.removeEventListener('mouseout', onHoverEnd);
+      if (animId !== null) cancelAnimationFrame(animId);
     };
   });
 </script>
@@ -57,14 +94,16 @@
     position: fixed;
     width: 6px;
     height: 6px;
-    background: #10b981;
+    margin: -3px 0 0 -3px;
+    background: rgb(var(--color-secondary));
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9999;
-    top: -4px;
-    left: -4px;
+    z-index: var(--z-cursor-dot);
+    top: 0;
+    left: 0;
     opacity: 0;
     transition: opacity 0.3s;
+    will-change: transform;
   }
 
   .cursor-dot.enabled {
@@ -75,17 +114,26 @@
     position: fixed;
     width: 32px;
     height: 32px;
-    border: 1.5px solid rgba(16, 185, 129, 0.5);
+    margin: -16px 0 0 -16px;
+    border: 2.5px solid rgb(var(--color-secondary));
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9998;
-    top: -16px;
-    left: -16px;
+    z-index: var(--z-cursor-ring);
+    top: 0;
+    left: 0;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, border-color 0.3s;
+    will-change: transform;
   }
 
   .cursor-ring.enabled {
     opacity: 1;
+  }
+
+  @media (pointer: coarse) {
+    .cursor-dot,
+    .cursor-ring {
+      display: none;
+    }
   }
 </style>

@@ -9,6 +9,7 @@
 <svelte:head>
   <title>{data.title}</title>
   <meta name="description" content={data.description} />
+  <meta property="og:image" content="/images/profile.webp" />
   {#if data.metadata.publishedAt}
     <meta property="article:published_time" content={String(data.metadata.publishedAt)} />
   {/if}
@@ -26,7 +27,7 @@
       <p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2">
         {String(data.metadata.tags?.[0] ?? 'General')} &bull; {new Date(String(data.metadata.publishedAt)).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
       </p>
-      <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display md:text-display text-primary">
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg md:font-display md:text-display text-primary">
         {String(data.metadata.title)}
       </h1>
     </header>

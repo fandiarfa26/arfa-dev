@@ -8,11 +8,12 @@
 <svelte:head>
   <title>{data.title}</title>
   <meta name="description" content={data.description} />
+  <meta property="og:image" content="/images/profile.webp" />
 </svelte:head>
 
 <Container>
   <div class="pt-8 pb-section-gap">
-    <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display md:text-display text-primary mb-4">Projects</h1>
+    <h1 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg md:font-display md:text-display text-primary mb-4">Projects</h1>
     <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-16">
       Want to explore more projects and the decisions behind them?
     </p>
@@ -36,6 +37,9 @@
                   alt={project.title}
                    class="w-full h-full object-cover opacity-70 grayscale mix-blend-luminosity group-hover:opacity-100 group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
                   loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                  onerror={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
                 />
               </div>
             {/if}

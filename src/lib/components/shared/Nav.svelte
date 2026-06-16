@@ -55,7 +55,7 @@
   });
 </script>
 
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+<nav class="fixed top-0 w-full z-[var(--z-nav)] bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
   <Container>
     <div class="flex justify-between items-center py-4">
       <a
@@ -84,7 +84,7 @@
           Let's Talk
         </a>
         <button
-          class="md:hidden text-primary p-2 inline-flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 hover:bg-surface-container"
+          class="md:hidden text-primary p-3 inline-flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 hover:bg-surface-container"
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
           onclick={open}
@@ -100,14 +100,14 @@
 <!-- Mobile menu drawer -->
 {#if menuOpen}
   <div
-    class="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm"
+    class="fixed inset-0 z-[var(--z-overlay)] bg-background/60 backdrop-blur-sm"
     role="presentation"
     onclick={close}
     aria-hidden="true"
   ></div>
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
-    class="mobile-drawer fixed top-0 right-0 z-[51] h-full w-72 max-w-[80vw] bg-surface border-l border-outline-variant/30 shadow-xl"
+    class="mobile-drawer fixed top-0 right-0 z-[var(--z-drawer)] h-full w-72 max-w-[80vw] bg-surface border-l border-outline-variant/30 shadow-xl"
     role="dialog"
     aria-modal="true"
     aria-label="Navigation menu"
@@ -118,7 +118,7 @@
     <div class="flex items-center justify-between p-6 border-b border-outline-variant/30">
       <span class="font-headline-md text-headline-md text-primary">MFA</span>
       <button
-        class="text-primary p-2 inline-flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 hover:bg-surface-container"
+        class="text-primary p-3 inline-flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 hover:bg-surface-container"
         aria-label="Close menu"
         onclick={close}
         bind:this={closeBtn}

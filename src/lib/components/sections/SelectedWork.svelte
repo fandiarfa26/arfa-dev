@@ -49,6 +49,9 @@
                   alt={project.title}
                    class="w-full h-full object-cover opacity-70 grayscale mix-blend-luminosity group-hover:opacity-100 group-hover:grayscale-0 group-hover:mix-blend-normal group-hover:scale-105 transition-all duration-700"
                   loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                  onerror={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
                 />
               {:else}
                 <div class="w-full h-full bg-surface-container-high rounded-lg flex items-center justify-center">

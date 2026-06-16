@@ -20,7 +20,7 @@
       const slug = path.split('/').pop()?.replace('.md', '') ?? '';
       const meta = post.metadata;
       return {
-        category: (meta.tags?.[0] as string) ?? 'General',
+        category: ((meta.tags as string[])?.[0]) ?? 'General',
         date: new Date(meta.publishedAt as string).toLocaleDateString('en-US', { year: 'numeric', month: 'short' }),
         title: meta.title as string,
         slug: `/blog/${slug}`
@@ -39,12 +39,12 @@
 <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-section-gap" id="thoughts">
   <div class="border-t border-outline-variant/30 pt-12">
     <div class="max-w-2xl mb-8">
-      <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-4">Thoughts</h2>
+      <h2 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg text-primary mb-4">Thoughts</h2>
       <p class="font-body-lg text-body-lg text-on-surface-variant">Occasionally, I write about things I'm learning, questioning, or improving. Not tutorials. Just honest reflections from building products.</p>
     </div>
     <div class="flex flex-col">
       {#each thoughts as thought, i}
-        <a href={thought.slug} class="group py-6 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:bg-surface-container transition-colors -mx-4 px-4 rounded-xl" bind:this={articles[i]}>
+        <a href={thought.slug} class="group py-6 border-t border-outline-variant/30 flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:bg-surface-container transition-colors -mx-4 px-4 rounded-xl" bind:this={articles[i]}>
           <div>
             <span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">{thought.category} &bull; {thought.date}</span>
             <h3 class="font-headline-md text-headline-md text-primary group-hover:text-secondary transition-colors">{thought.title}</h3>

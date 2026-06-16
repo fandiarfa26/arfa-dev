@@ -14,20 +14,29 @@
   let mouse = { x: -9999, y: -9999 };
   let animId: number | null = null;
 
-  const SPACING = 32;
-  const RADIUS = 140;
+  const RADIUS = 280;
   const MAX_SIZE = 2.5;
+
+  function getSpacing() {
+    const w = window.innerWidth;
+    if (w < 480) return 56;
+    if (w < 768) return 44;
+    return 32;
+  }
 
   function initGrid() {
     const w = window.innerWidth;
     const h = window.innerHeight;
+    const spacing = getSpacing();
     dots = [];
-    for (let x = SPACING; x < w; x += SPACING) {
-      for (let y = SPACING; y < h; y += SPACING) {
+    for (let x = spacing; x < w; x += spacing) {
+      for (let y = spacing; y < h; y += spacing) {
         dots.push({ ox: x, oy: y, size: 0 });
       }
     }
   }
+
+  let secondaryRGB = '16, 185, 129';
 
   function draw() {
     if (!ctx) return;
@@ -44,7 +53,7 @@
 
       ctx.beginPath();
       ctx.arc(d.ox, d.oy, 0.8 + d.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(16, 185, 129, ${0.08 + ease * 0.5})`;
+      ctx.fillStyle = `rgba(${secondaryRGB}, ${0.08 + ease * 0.5})`;
       ctx.fill();
     }
 
@@ -52,6 +61,12 @@
   }
 
   onMount(() => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--color-secondary').trim();
+    if (raw) secondaryRGB = raw.replace(/\s+/g, ', ');
+
+    const pointerMQ = window.matchMedia('(pointer: fine)');
+    if (!pointerMQ.matches) return;
+
     const reducedMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reducedMQ.matches) return;
 
@@ -72,15 +87,27 @@
       mouse.y = -9999;
     };
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const onResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      initGrid();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initGrid, 150);
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animId !== null) cancelAnimationFrame(animId);
+        animId = null;
+      } else {
+        animId = requestAnimationFrame(draw);
+      }
     };
 
     window.addEventListener('mousemove', onMove);
     document.addEventListener('mouseleave', onLeave);
     window.addEventListener('resize', onResize);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     draw();
 
@@ -88,6 +115,7 @@
       window.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (animId !== null) cancelAnimationFrame(animId);
     };
   });
@@ -99,9 +127,16 @@
   canvas {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: var(--z-aurora);
     pointer-events: none;
     width: 100vw;
     height: 100vh;
+    will-change: transform;
+  }
+
+  @media (pointer: coarse) {
+    canvas {
+      display: none;
+    }
   }
 </style>

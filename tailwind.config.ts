@@ -6,6 +6,27 @@ const config: Config = {
   content: ['./src/**/*.{html,js,svelte,ts,md}'],
   theme: {
     extend: {
+      typography: ({ theme }) => ({
+        invert: {
+          css: {
+            '--tw-prose-body': theme('colors.on-surface-variant'),
+            '--tw-prose-headings': theme('colors.primary'),
+            '--tw-prose-links': theme('colors.secondary'),
+            '--tw-prose-bold': theme('colors.primary'),
+            '--tw-prose-counters': theme('colors.on-surface-variant'),
+            '--tw-prose-bullets': theme('colors.secondary'),
+            '--tw-prose-hr': theme('colors.outline-variant'),
+            '--tw-prose-quotes': theme('colors.primary'),
+            '--tw-prose-quote-borders': theme('colors.secondary'),
+            '--tw-prose-captions': theme('colors.on-surface-variant'),
+            '--tw-prose-code': theme('colors.primary'),
+            '--tw-prose-pre-code': theme('colors.primary'),
+            '--tw-prose-pre-bg': theme('colors.surface-container-high'),
+            '--tw-prose-th-borders': theme('colors.outline-variant'),
+            '--tw-prose-td-borders': theme('colors.outline-variant'),
+          }
+        }
+      }),
       colors: {
         background: '#131313',
         'on-background': '#ffffff',
@@ -42,6 +63,7 @@ const config: Config = {
       fontFamily: {
         display: ['EB Garamond', ...fontFamily.serif],
         'headline-lg': ['EB Garamond', ...fontFamily.serif],
+        'headline-lg-mobile': ['EB Garamond', ...fontFamily.serif],
         'headline-md': ['EB Garamond', ...fontFamily.serif],
         'body-lg': ['Hanken Grotesk', ...fontFamily.sans],
         'body-md': ['Hanken Grotesk', ...fontFamily.sans],

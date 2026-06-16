@@ -9,11 +9,12 @@
 <svelte:head>
   <title>{data.title}</title>
   <meta name="description" content={data.description} />
+  <meta property="og:image" content="/images/profile.webp" />
 </svelte:head>
 
 <Container>
   <div class="pt-8 pb-section-gap">
-    <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display md:text-display text-primary mb-4">Blog</h1>
+    <h1 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg md:font-display md:text-display text-primary mb-4">Blog</h1>
     <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-16">Occasionally, I write about things I'm learning, questioning, or improving.</p>
 
     {#if data.posts.length === 0}
@@ -25,7 +26,7 @@
     {:else}
       <div class="flex flex-col">
         {#each data.posts as post}
-          <a href="/blog/{post.slug}" class="group py-6 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between md:items-center gap-4 hover:bg-surface-container transition-colors -mx-4 px-4 rounded-xl">
+          <a href="/blog/{post.slug}" class="group py-6 border-t border-outline-variant/30 flex flex-col sm:flex-row justify-between sm:items-center gap-4 hover:bg-surface-container transition-colors -mx-4 px-4 rounded-xl">
             <div>
               <span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">{String(post.tags?.[0] ?? 'General')} &bull; {new Date(String(post.publishedAt)).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}</span>
               <h2 class="font-headline-md text-headline-md text-primary group-hover:text-secondary transition-colors">{String(post.title)}</h2>

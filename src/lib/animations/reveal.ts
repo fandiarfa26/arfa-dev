@@ -1,29 +1,27 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
 export function animateReveal(element: HTMLElement, delay = 0) {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
-    element.style.opacity = '1';
-    return;
-  }
+  if (prefersReducedMotion) return;
 
-  gsap.fromTo(
-    element,
-    { opacity: 0, y: 32 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      delay,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: element,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        observer.disconnect();
+        element.style.transition = `opacity 0.7s ${EASE} ${delay}s, transform 0.7s ${EASE} ${delay}s`;
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
       }
-    }
+    },
+    { threshold: 0, rootMargin: '0px 0px -15% 0px' }
   );
+
+  observer.observe(element);
+
+  requestAnimationFrame(() => {
+    if (!element.style.opacity) {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(32px)';
+    }
+  });
 }

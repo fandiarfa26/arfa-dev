@@ -16,13 +16,13 @@
   <div class="border-t border-outline-variant/30 pt-12">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
       <div class="md:col-span-4 md:sticky md:top-32 self-start mb-8 md:mb-0">
-        <h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-4">Experience</h2>
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg text-primary mb-4">Experience</h2>
         <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Experiences that shaped how I approach products and teamwork.</p>
       </div>
       <div class="md:col-span-8 flex flex-col gap-12">
         {#each experiences as exp, i}
           <div class="group" bind:this={items[i]}>
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-2 gap-2">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2 gap-2">
               <h3 class="font-headline-md text-headline-md text-primary group-hover:text-secondary transition-colors">{exp.role}</h3>
               <span class="font-label-md text-label-md text-secondary tracking-widest">{exp.period}</span>
             </div>
