@@ -16,11 +16,23 @@
     --z-cursor-ring: calc(var(--z-cursor) - 1);
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   html {
-    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-wrap: break-word;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 128px;
+    }
   }
 
   body {

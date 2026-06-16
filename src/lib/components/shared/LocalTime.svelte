@@ -18,7 +18,7 @@
   });
 </script>
 
-<div class="h-32 border border-outline-variant rounded-xl p-6 bg-surface-container-highest text-primary flex flex-col items-center justify-center text-center shadow-sm">
+<div class="min-h-32 border border-outline-variant rounded-xl p-6 bg-surface-container-highest text-primary flex flex-col items-center justify-center text-center shadow-sm">
   <span class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest mb-1 text-secondary">Bangkalan, ID</span>
   <div class="font-headline-md text-headline-md tabular-nums tracking-tight">{time}</div>
 </div>

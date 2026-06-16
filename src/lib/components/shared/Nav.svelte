@@ -1,8 +1,11 @@
 <script lang="ts">
   import { Menu, X } from 'lucide-svelte';
   import Container from './Container.svelte';
+  import Button from './Button.svelte';
+  import { onMount } from 'svelte';
 
   const navLinks = [
+    { href: '/#about', label: 'About' },
     { href: '/#work', label: 'Work' },
     { href: '/#experience', label: 'Experience' },
     { href: '/#thoughts', label: 'Thoughts' }
@@ -12,6 +15,21 @@
   let openBtn: HTMLButtonElement | undefined = $state();
   let closeBtn: HTMLButtonElement | undefined = $state();
   let drawer: HTMLDivElement | undefined = $state();
+  let activeSection = $state('');
+
+  onMount(() => {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          activeSection = entry.target.id;
+        }
+      }
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(s => observer.observe(s));
+    return () => observer.disconnect();
+  });
 
   function open() {
     menuOpen = true;
@@ -47,8 +65,11 @@
   $effect(() => {
     if (menuOpen) {
       closeBtn?.focus();
+      const main = document.getElementById('main-content');
+      if (main) main.inert = true;
       return () => {
         document.body.style.overflow = '';
+        if (main) main.inert = false;
         openBtn?.focus();
       };
     }
@@ -69,7 +90,7 @@
           <li>
             <a
               href={link.href}
-              class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+              class="font-label-md text-label-md {activeSection === link.href.replace('/#', '') ? 'text-secondary' : 'text-on-surface-variant'} hover:text-secondary transition-colors duration-300"
             >
               {link.label}
             </a>
@@ -77,12 +98,9 @@
         {/each}
       </ul>
       <div class="flex items-center gap-4">
-        <a
-          href="/#contact"
-          class="hidden md:inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 bg-secondary text-on-primary hover:bg-secondary/90 h-10 px-4 py-2 shadow-sm"
-        >
+        <Button href="/#contact" className="hidden md:inline-flex">
           Let's Talk
-        </a>
+        </Button>
         <button
           class="md:hidden text-primary p-3 inline-flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 hover:bg-surface-container"
           aria-label="Toggle menu"
@@ -132,7 +150,7 @@
           <li>
             <a
               href={link.href}
-              class="block px-4 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container rounded-lg transition-colors"
+              class="block px-4 py-3 font-label-md text-label-md {activeSection === link.href.replace('/#', '') ? 'text-secondary' : 'text-on-surface-variant'} hover:text-primary hover:bg-surface-container rounded-lg transition-colors"
               onclick={close}
             >
               {link.label}
@@ -141,13 +159,9 @@
         {/each}
       </ul>
       <div class="mt-8 pt-6 border-t border-outline-variant/30">
-        <a
-          href="/#contact"
-          class="flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 bg-secondary text-on-primary hover:bg-secondary/90 h-11 px-8 shadow-sm"
-          onclick={close}
-        >
+        <Button href="/#contact" onclick={close}>
           Let's Talk
-        </a>
+        </Button>
       </div>
     </nav>
   </div>

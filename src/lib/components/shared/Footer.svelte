@@ -11,12 +11,12 @@
         Built with curiosity, collaboration, and plenty of iteration.
       </div>
       <div class="flex gap-6">
-        <a href="https://www.linkedin.com/in/arfabuma/" target="_blank" rel="noopener noreferrer" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">LinkedIn</a>
-        <a href="https://github.com/fandiarfa26" target="_blank" rel="noopener noreferrer" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">GitHub</a>
-        <a href="https://www.tiktok.com/@arfa_dev" target="_blank" rel="noopener noreferrer" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">TikTok</a>
+        <a href="https://www.linkedin.com/in/arfabuma/" target="_blank" rel="noopener noreferrer" aria-label="Fandi's LinkedIn profile" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">LinkedIn</a>
+        <a href="https://github.com/fandiarfa26" target="_blank" rel="noopener noreferrer" aria-label="Fandi's GitHub profile" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">GitHub</a>
+        <a href="https://www.tiktok.com/@arfa_dev" target="_blank" rel="noopener noreferrer" aria-label="Fandi's TikTok profile" class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors inline-block py-3 min-h-[44px]">TikTok</a>
       </div>
     </div>
-    <div class="text-center mt-6 font-label-sm text-label-sm text-on-surface-variant/60">
+    <div class="text-center mt-6 font-label-sm text-label-sm text-on-surface-variant">
       &copy; {year} M. Fandi Arfabuma
     </div>
   </Container>

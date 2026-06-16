@@ -36,6 +36,7 @@
   });
 </script>
 
+{#if thoughts.length > 0}
 <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-section-gap" id="thoughts">
   <div class="border-t border-outline-variant/30 pt-12">
     <div class="max-w-2xl mb-8">
@@ -61,3 +62,4 @@
     </div>
   </div>
 </section>
+{/if}

@@ -4,6 +4,7 @@
   let dot: HTMLElement;
   let ring: HTMLElement;
   let enabled = $state(false);
+  let visible = $state(true);
 
   function lerp(a: number, b: number, t: number) {
     return a + (b - a) * t;
@@ -28,8 +29,16 @@
     let scale = 1;
     let targetScale = 1;
     let animId: number | null = null;
+    let lastMove = 0;
+    const IDLE_TIMEOUT = 3000;
 
     function tick() {
+      if (Date.now() - lastMove > IDLE_TIMEOUT) {
+        animId = null;
+        visible = false;
+        return;
+      }
+
       dotX = lerp(dotX, targetX, 0.15);
       dotY = lerp(dotY, targetY, 0.15);
       ringX = lerp(ringX, targetX, 0.08);
@@ -45,6 +54,8 @@
     const onMove = (e: MouseEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
+      lastMove = Date.now();
+      visible = true;
       if (animId === null) animId = requestAnimationFrame(tick);
     };
 
@@ -79,15 +90,17 @@
   });
 </script>
 
-<svelte:body class:cursor-none={enabled} />
+<svelte:body class:cursor-none={enabled && visible} />
 
-<div class="cursor-dot" class:enabled bind:this={dot}></div>
-<div class="cursor-ring" class:enabled bind:this={ring}></div>
+<div class="cursor-dot" class:enabled class:visible bind:this={dot}></div>
+<div class="cursor-ring" class:enabled class:visible bind:this={ring}></div>
 
 <style>
-  :global(body.cursor-none),
-  :global(body.cursor-none *) {
-    cursor: none !important;
+  @media (pointer: fine) {
+    :global(body.cursor-none),
+    :global(body.cursor-none *) {
+      cursor: none !important;
+    }
   }
 
   .cursor-dot {
@@ -106,7 +119,7 @@
     will-change: transform;
   }
 
-  .cursor-dot.enabled {
+  .cursor-dot.enabled.visible {
     opacity: 1;
   }
 
@@ -126,7 +139,7 @@
     will-change: transform;
   }
 
-  .cursor-ring.enabled {
+  .cursor-ring.enabled.visible {
     opacity: 1;
   }
 

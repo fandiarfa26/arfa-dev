@@ -1,5 +1,6 @@
 <script lang="ts">
   import Container from '$lib/components/shared/Container.svelte';
+  import Tag from '$lib/components/shared/Tag.svelte';
   import type { PageData } from './$types';
 
   let { data }: { data: PageData } = $props();
@@ -25,7 +26,7 @@
             <p class="font-body-md text-body-md text-secondary mb-4">{project.role} &bull; {project.year}</p>
             <div class="flex flex-wrap gap-2">
               {#each project.tags as tag}
-                <span class="inline-flex items-center rounded-full border border-outline-variant px-2.5 py-0.5 font-label-sm text-xs font-semibold bg-surface-container text-on-surface-variant">{tag}</span>
+                <Tag>{tag}</Tag>
               {/each}
             </div>
           </div>
@@ -35,7 +36,7 @@
                 <img
                   src={project.image}
                   alt={project.title}
-                   class="w-full h-full object-cover opacity-70 grayscale mix-blend-luminosity group-hover:opacity-100 group-hover:grayscale-0 group-hover:mix-blend-normal transition-all duration-700"
+                   class="w-full h-full object-cover transition-all duration-700"
                   loading="lazy"
                   decoding="async"
                   sizes="(max-width: 768px) 100vw, 66vw"

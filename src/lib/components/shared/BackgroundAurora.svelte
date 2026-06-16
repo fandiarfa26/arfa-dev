@@ -37,9 +37,20 @@
   }
 
   let secondaryRGB = '16, 185, 129';
+  let lastMove = 0;
+  let isAnimating = false;
+  const IDLE_TIMEOUT = 2000;
 
   function draw() {
     if (!ctx) return;
+
+    if (Date.now() - lastMove > IDLE_TIMEOUT) {
+      isAnimating = false;
+      animId = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (const d of dots) {
@@ -80,6 +91,11 @@
     const onMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
+      lastMove = Date.now();
+      if (!isAnimating) {
+        isAnimating = true;
+        if (animId === null) animId = requestAnimationFrame(draw);
+      }
     };
 
     const onLeave = () => {
@@ -131,7 +147,6 @@
     pointer-events: none;
     width: 100vw;
     height: 100vh;
-    will-change: transform;
   }
 
   @media (pointer: coarse) {
