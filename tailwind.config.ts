@@ -21,8 +21,8 @@ const config: Config = {
         secondary: '#10b981',
         'on-secondary': '#ffffff',
         'outline-variant': '#333333',
-        'secondary-container': '#064e3b',
-        'tertiary-container': '#064e3b',
+        'secondary-container': '#04372a',
+        'tertiary-container': '#04372a',
         'on-tertiary-container': '#10b981'
       },
       borderRadius: {
