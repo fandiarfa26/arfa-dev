@@ -35,8 +35,8 @@
                 <Tag>{tag}</Tag>
               {/each}
             </div>
-            {#if project.links}
-              <a href={project.links.demo ?? '#'} class="inline-flex items-center gap-2 font-label-md text-label-md text-primary mt-2 hover:text-secondary transition-colors">
+            {#if project.links?.demo}
+              <a href={project.links.demo} class="inline-flex items-center gap-2 font-label-md text-label-md text-primary mt-2 hover:text-secondary transition-colors">
                 View Live Demo
                 <ArrowRight size={16} />
               </a>
