@@ -22,6 +22,16 @@
       line-height: 1.4;
     }
 
+    :global(nav),
+    :global(footer),
+    :global(canvas) {
+      display: none !important;
+    }
+
+    :global(main) {
+      padding-top: 0 !important;
+    }
+
     :global(.no-print) { display: none !important; }
 
     :global(.resume-item) {
