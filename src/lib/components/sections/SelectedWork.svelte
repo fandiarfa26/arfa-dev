@@ -7,6 +7,8 @@
 
   let articles: HTMLElement[] = [];
 
+  $: recentProjects = projects.slice(0, 3);
+
   onMount(() => {
     articles.forEach((el, i) => {
       if (el) animateReveal(el, i * 0.1);
@@ -23,7 +25,7 @@
       </p>
     </div>
     <div class="flex flex-col gap-16">
-      {#each projects as project, i}
+      {#each recentProjects as project, i}
         <article class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-gutter group" bind:this={articles[i]}>
           <div class="md:col-span-4 flex flex-col gap-4 items-start md:sticky md:top-32 self-start">
             <div>
@@ -81,10 +83,19 @@
             </div>
           </div>
         </article>
-        {#if i < projects.length - 1}
+        {#if i < recentProjects.length - 1}
           <hr class="border-outline-variant/30 border-t" />
         {/if}
       {/each}
+    </div>
+    <div class="mt-16 text-center">
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors border border-outline-variant/50 rounded-full px-8 py-3 hover:border-secondary"
+      >
+        View All Projects
+        <ArrowRight size={18} />
+      </a>
     </div>
   </div>
 </section>

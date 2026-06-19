@@ -43,11 +43,11 @@
         </p>
       </div>
       <!-- Card 3 + 4 Stack -->
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 h-full">
         <div class="flex-1 border border-outline-variant rounded-xl p-6 bg-surface-container text-on-surface flex flex-col justify-center shadow-sm" bind:this={cards[2]}>
           <h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-2">Beyond the Editor</h3>
           <p class="font-body-md text-body-md text-on-surface-variant text-sm">
-            Currently obsessed with SvelteKit, editorial typography, cooking, and finding better ways to integrate AI tools into a human-led design process.
+            SvelteKit, editorial typography, cooking, and integrating AI into a human-led design process.
           </p>
         </div>
         <LocalTime />
