@@ -28,6 +28,7 @@
       <div class="flex flex-wrap items-center gap-4" data-hero-item>
         <Button href="#work">View Selected Work</Button>
         <Button variant="secondary" href="#contact">Let's Talk</Button>
+        <Button href="/resume">Download ATS CV</Button>
       </div>
     </div>
   </div>
