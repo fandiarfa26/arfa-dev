@@ -1,108 +1,134 @@
 <script lang="ts">
+  import Container from '$lib/components/shared/Container.svelte';
   import Button from '$lib/components/shared/Button.svelte';
   import { personalInfo, summary, skills, education, languages, experiences, projects } from '$lib/data/resume';
+  import type { PageData } from './$types';
+
+  let { data }: { data: PageData } = $props();
 
   function triggerPrint() {
     setTimeout(() => window.print(), 300);
   }
 </script>
 
-<div class="no-print toolbar">
-  <Button onclick={triggerPrint}>Download CV</Button>
-  <Button href="/" variant="secondary">Back to Home</Button>
-</div>
+<svelte:head>
+  <title>{data.title}</title>
+  <meta name="description" content={data.description} />
+  <meta property="og:image" content="/images/profile.webp" />
+</svelte:head>
 
-<div class="card">
-  <div class="resume">
-    <header>
-      <h1>{personalInfo.name}</h1>
-      <p class="contact">
-        {personalInfo.location}
-        <span class="sep">|</span>
-        {personalInfo.email}
-        <span class="sep">|</span>
-        <a href={personalInfo.linkedin}>linkedin.com/in/arfabuma</a>
-        <span class="sep">|</span>
-        <a href={personalInfo.website}>arfabuma.web.id</a>
-      </p>
-    </header>
+<Container>
+  <div class="pt-8 pb-section-gap">
+    <h1 class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg md:font-display md:text-display text-primary mb-4">Resume</h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8">
+      A concise overview of my experience, skills, and projects — formatted for ATS parsing.
+    </p>
 
-    <section>
-      <h2>SUMMARY</h2>
-      <p class="summary">{summary}</p>
-    </section>
+    <div class="no-print flex flex-wrap gap-4 mb-10">
+      <Button onclick={triggerPrint}>Download CV</Button>
+      <Button href="/" variant="secondary">Back to Home</Button>
+    </div>
 
-    <section>
-      <h2>SKILLS</h2>
-      {#each skills as skill}
-        <p class="skill-line">
-          <strong>{skill.category}:</strong> {skill.items.join(', ')}
-        </p>
-      {/each}
-    </section>
+    <div class="card-blur">
+      <div class="card">
+        <div class="resume">
+          <header>
+            <h1 class="cv-name">{personalInfo.name}</h1>
+            <p class="cv-contact">
+              {personalInfo.location}
+              <span class="sep">|</span>
+              {personalInfo.email}
+              <span class="sep">|</span>
+              <a href={personalInfo.linkedin}>linkedin.com/in/arfabuma</a>
+              <span class="sep">|</span>
+              <a href={personalInfo.website}>arfabuma.web.id</a>
+            </p>
+          </header>
 
-    <section>
-      <h2>EXPERIENCE</h2>
-      {#each experiences as exp}
-        <div class="resume-item">
-          <div class="item-header">
-            <h3>{exp.role}</h3>
-            <p class="company">{exp.company}</p>
-            <p class="period">{exp.period}</p>
-          </div>
-          <ul>
-            {#each exp.atsHighlights ?? exp.highlights as highlight}
-              <li>{highlight}</li>
+          <section>
+            <h2>SUMMARY</h2>
+            <p class="summary">{summary}</p>
+          </section>
+
+          <section>
+            <h2>SKILLS</h2>
+            {#each skills as skill}
+              <p class="skill-line">
+                <strong>{skill.category}:</strong> {skill.items.join(', ')}
+              </p>
             {/each}
-          </ul>
-        </div>
-      {/each}
-    </section>
+          </section>
 
-    <section>
-      <h2>PROJECTS</h2>
-      {#each projects as project}
-        <div class="resume-item">
-          <div class="item-header">
-            <h3>{project.title}</h3>
-            <p class="period">{project.year}</p>
-          </div>
-          {#if project.tags.length}
-            <p class="tags"><strong>Tech:</strong> {project.tags.join(', ')}</p>
-          {/if}
-          {#if project.atsHighlights}
-            <ul>
-              {#each project.atsHighlights as highlight}
-                <li>{highlight}</li>
-              {/each}
-            </ul>
-          {/if}
-        </div>
-      {/each}
-    </section>
+          <section>
+            <h2>EXPERIENCE</h2>
+            {#each experiences as exp}
+              <div class="resume-item">
+                <div class="item-header">
+                  <h3>{exp.role}</h3>
+                  <p class="company">{exp.company}</p>
+                  <p class="period">{exp.period}</p>
+                </div>
+                <ul>
+                  {#each exp.atsHighlights ?? exp.highlights as highlight}
+                    <li>{highlight}</li>
+                  {/each}
+                </ul>
+              </div>
+            {/each}
+          </section>
 
-    <section>
-      <h2>EDUCATION</h2>
-      {#each education as edu}
-        <div class="resume-item">
-          <h3>{edu.university}</h3>
-          <p>{edu.degree} <span class="sep">|</span> {edu.period}{#if edu.gpa} <span class="sep">|</span> GPA: {edu.gpa}{/if}</p>
-        </div>
-      {/each}
-    </section>
+          <section>
+            <h2>PROJECTS</h2>
+            {#each projects as project}
+              <div class="resume-item">
+                <div class="item-header">
+                  <h3>{project.title}</h3>
+                  <p class="period">{project.year}</p>
+                </div>
+                {#if project.tags.length}
+                  <p class="tags"><strong>Tech:</strong> {project.tags.join(', ')}</p>
+                {/if}
+                {#if project.atsHighlights}
+                  <ul>
+                    {#each project.atsHighlights as highlight}
+                      <li>{highlight}</li>
+                    {/each}
+                  </ul>
+                {/if}
+              </div>
+            {/each}
+          </section>
 
-    <section>
-      <h2>LANGUAGES</h2>
-      <p>{languages.join(', ')}</p>
-    </section>
+          <section>
+            <h2>EDUCATION</h2>
+            {#each education as edu}
+              <div class="resume-item">
+                <h3>{edu.university}</h3>
+                <p>{edu.degree} <span class="sep">|</span> {edu.period}{#if edu.gpa} <span class="sep">|</span> GPA: {edu.gpa}{/if}</p>
+              </div>
+            {/each}
+          </section>
+
+          <section>
+            <h2>LANGUAGES</h2>
+            <p>{languages.join(', ')}</p>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</Container>
 
 <style>
-  .toolbar {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 12px;
+  .card-blur {
+    filter: blur(5px);
+    transition: filter 0.3s;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+
+  .card-blur:hover {
+    filter: blur(2px);
   }
 
   .card {
@@ -110,18 +136,31 @@
     border: 1px solid rgb(51 51 51 / 0.3);
     border-radius: 12px;
     padding: 32px;
-    max-width: 210mm;
-    margin: 0 auto;
   }
 
   .resume {
-    font-family: 'Times New Roman', Times, serif;
     color: #fff;
+    font-family: 'Hanken Grotesk', sans-serif;
   }
 
-  h1 {
+  .cv-name {
     font-size: 18pt;
     margin: 0 0 4px 0;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .resume h2, .resume h3 {
+    font-family: 'EB Garamond', serif;
+  }
+
+  .cv-contact {
+    font-size: 10pt;
+    margin: 0 0 8px 0;
+  }
+
+  .sep {
+    margin: 0 6px;
+    opacity: 0.5;
   }
 
   h2 {
@@ -136,16 +175,6 @@
   h3 {
     font-size: 11pt;
     margin: 0 0 2px 0;
-  }
-
-  .contact {
-    font-size: 10pt;
-    margin: 0 0 8px 0;
-  }
-
-  .sep {
-    margin: 0 6px;
-    opacity: 0.5;
   }
 
   .summary {
@@ -207,16 +236,20 @@
   }
 
   @media print {
+    .card-blur {
+      filter: none;
+    }
+
     .card {
       background: none;
       border: none;
       border-radius: 0;
       padding: 0;
-      max-width: none;
     }
 
     .resume {
       color: #000;
+      font-family: 'Times New Roman', Times, serif;
     }
 
     h2 {
