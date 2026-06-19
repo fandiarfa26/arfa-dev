@@ -1,20 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { personalInfo, summary, skills, education, languages, experiences, projects } from '$lib/data/resume';
 
   function triggerPrint() {
     setTimeout(() => window.print(), 300);
   }
-
-  onMount(() => {
-    triggerPrint();
-  });
 </script>
 
 <div class="resume">
   <div class="no-print toolbar">
     <button onclick={triggerPrint} class="print-btn">
-      Print / Save as PDF
+      Download CV
     </button>
     <a href="/" class="back-btn">Back to Home</a>
   </div>

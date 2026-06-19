@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Mail } from 'lucide-svelte';
+  import { Mail, FileText } from 'lucide-svelte';
   import Button from '$lib/components/shared/Button.svelte';
   import { animateReveal } from '$lib/animations/reveal';
   import { onMount } from 'svelte';
@@ -42,7 +42,10 @@
             <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-5 h-5" style="filter: brightness(0) invert(1)" onerror={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')} />
             WhatsApp
           </Button>
-          <Button href="/resume">Download ATS CV</Button>
+          <Button variant="secondary" href="/resume">
+            <FileText size={20} />
+            My Resume
+          </Button>
         </div>
       </div>
     </div>
