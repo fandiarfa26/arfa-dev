@@ -9,6 +9,7 @@ export type Project = {
   challenge: string;
   decision: string;
   outcome: string;
+  atsHighlights?: string[];
   links?: {
     demo?: string;
     github?: string;
@@ -42,6 +43,10 @@ export const projects: Project[] = [
       "I adopted an AI-assisted workflow with OpenCode to accelerate development, while reviewing every generated solution and prioritizing an MVP built with SvelteKit.",
     outcome:
       "ArfaPOS was successfully deployed as a working application accessible online and evolved beyond a simple experiment into a functional POS implementation intended for real-world use. The project became both a portfolio piece and a practical demonstration of how AI-assisted development can accelerate delivery while preserving human ownership of technical decisions and product direction.",
+    atsHighlights: [
+      'Developed a full-stack point-of-sale application using SvelteKit and Supabase',
+      'Designed and implemented POS transaction flows for real-world use'
+    ],
     links: {
       demo: "https://arfa-pos.vercel.app",
       github: "https://github.com/fandiarfa26/arfa-pos",
@@ -70,6 +75,10 @@ export const projects: Project[] = [
       'The Agent Dashboard was separated into its own application, allowing it to evolve independently from the public-facing website.',
     outcome:
       'The website was successfully migrated to Next.js, and the Agent Dashboard was delivered as a standalone application within the new architecture.',
+    atsHighlights: [
+      'Migrated legacy system to modern web architecture',
+      'Built authentication system and dashboard for internal users'
+    ],
     links: {
       demo: 'https://www.brighton.co.id/',
       github: ''
@@ -92,7 +101,11 @@ export const projects: Project[] = [
     situation: 'FoodieMu App was developed by PT. Inovasi Utama Nusantara in collaboration with Universitas Muhammadiyah Kalimantan Timur. The platform connected customers, UMKM partners, drivers, and students in a food delivery ecosystem. Students could promote local businesses through an affiliate-like model while users ordered food through the mobile app.',
     challenge: 'Building a multi-role food delivery application while learning Flutter for the first time.',
     decision: 'I used Flutter with a modular code structure to manage feature complexity and support Android and iOS from a single codebase.',
-    outcome: 'The application was released and used by customers, UMKM partners, and drivers to support real-world food ordering and promotion activities.',
+    outcome:       'The application was released and used by customers, UMKM partners, and drivers to support real-world food ordering and promotion activities.',
+    atsHighlights: [
+      'Built a multi-role food delivery platform using Flutter and Firebase',
+      'Supported Android and iOS delivery from a single codebase'
+    ],
     links: {
       demo: '',
       github: ''
@@ -120,6 +133,10 @@ export const projects: Project[] = [
       'I used Firebase as the central data source shared by both the Flutter application and the React admin dashboard to simplify data synchronization and monitoring.',
     outcome:
       'The project was successfully delivered with both the mobile learning app and admin dashboard fully functional, including learning materials, quizzes, and progress tracking features.',
+    atsHighlights: [
+      'Developed a learning platform with Flutter mobile app and React admin dashboard',
+      'Implemented synchronized data flow between mobile app and admin dashboard'
+    ],
     links: {
       demo: '',
       github: ''
