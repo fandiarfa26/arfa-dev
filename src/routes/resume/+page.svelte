@@ -2,10 +2,7 @@
   import { onMount } from 'svelte';
   import { personalInfo, summary, skills, education, languages, experiences, projects } from '$lib/data/resume';
 
-  let printing = $state(false);
-
   function triggerPrint() {
-    printing = true;
     setTimeout(() => window.print(), 300);
   }
 
@@ -110,6 +107,7 @@
     max-width: 190mm;
     margin: 0 auto;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
   }
 
   .toolbar {
@@ -228,6 +226,10 @@
     .resume {
       max-width: none;
       padding: 0;
+    }
+
+    .no-print {
+      display: none !important;
     }
 
     a {
