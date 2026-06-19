@@ -17,14 +17,16 @@
     :global(body) {
       background: white !important;
       color: black !important;
-      font-family: 'Times New Roman', Times, serif;
+      font-family: Arial, sans-serif;
       font-size: 11pt;
       line-height: 1.4;
     }
 
     :global(nav),
     :global(footer),
-    :global(canvas) {
+    :global(canvas),
+    :global(.cursor-dot),
+    :global(.cursor-ring) {
       display: none !important;
     }
 
