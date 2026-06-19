@@ -3,6 +3,7 @@
   import Container from './Container.svelte';
   import Button from './Button.svelte';
   import { onMount } from 'svelte';
+  import { afterNavigate } from '$app/navigation';
 
   const navLinks = [
     { href: '/#about', label: 'About' },
@@ -17,8 +18,15 @@
   let drawer: HTMLDivElement | undefined = $state();
   let activeSection = $state('');
 
+  let observer: IntersectionObserver;
+
   onMount(() => {
-    const observer = new IntersectionObserver((entries) => {
+    return () => observer?.disconnect();
+  });
+
+  afterNavigate(() => {
+    observer?.disconnect();
+    observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
           activeSection = entry.target.id;
@@ -28,7 +36,6 @@
 
     const sections = document.querySelectorAll('section[id]');
     sections.forEach(s => observer.observe(s));
-    return () => observer.disconnect();
   });
 
   function open() {
