@@ -156,12 +156,12 @@
   .contact {
     font-size: 10pt;
     margin: 0 0 8px 0;
-    color: #333;
+    color: #000;
   }
 
   .sep {
     margin: 0 6px;
-    color: #999;
+    color: #000;
   }
 
   .summary {
@@ -189,7 +189,7 @@
 
   .period {
     font-size: 10pt;
-    color: #444;
+    color: #000;
     margin: 0;
   }
 

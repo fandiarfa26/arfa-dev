@@ -14,7 +14,7 @@
   @page { size: A4; margin: 20mm; }
 
   @media print {
-    body {
+    :global(body) {
       background: white !important;
       color: black !important;
       font-family: 'Times New Roman', Times, serif;

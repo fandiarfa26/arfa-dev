@@ -42,6 +42,7 @@
             <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-5 h-5" style="filter: brightness(0) invert(1)" onerror={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')} />
             WhatsApp
           </Button>
+          <Button href="/resume">Download ATS CV</Button>
         </div>
       </div>
     </div>
