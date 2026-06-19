@@ -22,9 +22,9 @@
       line-height: 1.4;
     }
 
-    .no-print { display: none !important; }
+    :global(.no-print) { display: none !important; }
 
-    .resume-item {
+    :global(.resume-item) {
       break-inside: avoid;
       page-break-inside: avoid;
     }

@@ -7,6 +7,7 @@
   import { page } from '$app/stores';
 
   let { children }: { children: import('svelte').Snippet } = $props();
+  let isResume = $derived($page.url.pathname === '/resume');
 </script>
 
 <svelte:head>
@@ -17,14 +18,18 @@
   <meta property="og:image" content="/images/profile.webp" />
 </svelte:head>
 
-<BackgroundAurora />
-<CursorFollower />
-<a href="#main-content" class="skip-link">Skip to content</a>
-<Nav />
+{#if !isResume}
+  <BackgroundAurora />
+  <CursorFollower />
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <Nav />
+{/if}
 <main id="main-content" class="pt-24 md:pt-32 outline-none" tabindex="-1">
   {@render children()}
 </main>
-<Footer />
+{#if !isResume}
+  <Footer />
+{/if}
 
 <style>
   .skip-link {
