@@ -5,6 +5,10 @@
   import BackgroundAurora from '$lib/components/shared/BackgroundAurora.svelte';
   import CursorFollower from '$lib/components/shared/CursorFollower.svelte';
   import { page } from '$app/stores';
+  import { dev } from '$app/environment';
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+  injectAnalytics({ mode: dev ? 'development' : 'production' });
 
   let { children }: { children: import('svelte').Snippet } = $props();
 </script>
