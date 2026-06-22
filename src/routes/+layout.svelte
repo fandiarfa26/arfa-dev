@@ -7,8 +7,10 @@
   import { page } from '$app/stores';
   import { dev } from '$app/environment';
   import { injectAnalytics } from '@vercel/analytics/sveltekit';
+  import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
   injectAnalytics({ mode: dev ? 'development' : 'production' });
+  injectSpeedInsights();
 
   let { children }: { children: import('svelte').Snippet } = $props();
 </script>
