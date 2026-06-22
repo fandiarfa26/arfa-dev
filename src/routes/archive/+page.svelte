@@ -18,11 +18,15 @@
     <h1
       class="font-headline-lg-mobile text-headline-lg-mobile sm:font-headline-lg sm:text-headline-lg md:font-display md:text-display text-primary mb-4"
     >
-      Portfolio Archive
+      Portfolio History
     </h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-16">
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-4">
       Explore previous versions of my portfolio and see how my skills, design
       preferences, and technologies evolved over the years.
+    </p>
+    <p class="font-body-md text-body-md text-secondary mb-16">
+      You're currently viewing <strong>V4</strong> — the latest iteration
+      built with SvelteKit, TypeScript, and Tailwind CSS.
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -43,6 +47,20 @@
             </span>
           </div>
 
+          {#if item.image}
+            <div class="aspect-[16/9] w-full bg-surface-container-lowest border border-outline-variant shadow-sm rounded-xl overflow-hidden">
+              <img
+                src={item.image}
+                alt="{item.title} screenshot"
+                class="w-full h-full object-cover transition-all duration-700"
+                loading="lazy"
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                onerror={(e) => ((e.currentTarget as HTMLImageElement).style.display = 'none')}
+              />
+            </div>
+          {/if}
+
           <div>
             <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
               {item.title}
@@ -58,16 +76,12 @@
             {/each}
           </div>
 
-          <p class="font-body-sm text-body-sm text-secondary mt-auto">
-            Status: {item.status}
-          </p>
-
           <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="{item.title} — opens in new tab"
-            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 active:scale-[0.97] h-11 px-6 shadow-sm border border-outline-variant bg-transparent hover:bg-surface-container hover:text-primary w-full"
+            class="mt-auto inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 active:scale-[0.97] h-11 px-6 shadow-sm border border-outline-variant bg-transparent hover:bg-surface-container hover:text-primary w-full"
           >
             Visit Website
             <ArrowUpRight class="w-4 h-4" />

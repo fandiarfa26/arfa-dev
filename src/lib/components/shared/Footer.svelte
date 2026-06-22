@@ -17,14 +17,6 @@
       </div>
     </div>
     <div class="text-center mt-6 font-label-sm text-label-sm text-on-surface-variant">
-      <a
-        href="/archive"
-        class="inline-block py-3 min-h-[44px] text-on-surface-variant hover:text-secondary transition-colors"
-      >
-        Portfolio Archive &rarr;
-      </a>
-    </div>
-    <div class="text-center mt-2 font-label-sm text-label-sm text-on-surface-variant">
       &copy; {year} M. Fandi Arfabuma
     </div>
   </Container>

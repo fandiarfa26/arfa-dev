@@ -4,39 +4,39 @@ export type ArchiveItem = {
   title: string;
   description: string;
   tech: string[];
-  status: string;
   url: string;
+  image?: string;
 };
 
 export const archives: ArchiveItem[] = [
   {
     version: "V1",
     year: 2021,
-    title: "First Portfolio",
+    title: "Starting the Journey",
     description:
-      "Built during college while learning web development. My first attempt at creating a personal portfolio to showcase projects and experiments.",
-    tech: ["HTML", "CSS", "Bootstrap"],
-    status: "Student",
-    url: "https://fandiarfa26.github.io/portfolio-v1",
+      "My first personal portfolio created shortly after graduation. It was built to establish my online presence and begin my journey as a frontend developer.",
+    tech: ["VueJS", "TailwindCSS"],
+    url: "https://fandiarfa26.github.io",
+    image: "/images/archive/v1.webp",
   },
   {
     version: "V2",
     year: 2023,
-    title: "Mid-Career Refresh",
+    title: "Growing as a Developer",
     description:
-      "Rebuilt from scratch with modern tooling and a cleaner, more intentional design to reflect growing frontend experience.",
-    tech: ["Next.js", "Tailwind CSS", "TypeScript"],
-    status: "Early Career",
-    url: "https://fandiarfa26.github.io",
+      "Rebuilt after gaining several years of professional experience. This version introduced React and reflected my growth as a frontend developer.",
+    tech: ["React", "TailwindCSS"],
+    url: "https://personal-web-22.vercel.app",
+    image: "/images/archive/v2.webp",
   },
   {
     version: "V3",
     year: 2025,
-    title: "Previous Portfolio",
+    title: "Crafting the Experience",
     description:
-      "The immediate predecessor to the current site. Refined visual language with an emphasis on typography and minimalism.",
-    tech: ["SvelteKit", "TypeScript", "Tailwind CSS", "mdsvex"],
-    status: "Previous Version",
-    url: "https://v3.arfa.dev",
+      "Focused on personal branding with a cleaner design and interactive animations. This version explored how motion and visual details could improve the user experience.",
+    tech: ["TailwindCSS", "NuxtJS", "TypeScript"],
+    url: "https://fandiarfa26.vercel.app",
+    image: "/images/archive/v3.webp",
   },
 ];

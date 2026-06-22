@@ -88,12 +88,19 @@
         {/if}
       {/each}
     </div>
-    <div class="mt-16 text-center">
+    <div class="mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
         href="/projects"
         class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors border border-outline-variant/50 rounded-full px-8 py-3 hover:border-secondary"
       >
         View All Projects
+        <ArrowRight size={18} />
+      </a>
+      <a
+        href="/archive"
+        class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors border border-outline-variant/50 rounded-full px-8 py-3 hover:border-secondary"
+      >
+        Portfolio History
         <ArrowRight size={18} />
       </a>
     </div>

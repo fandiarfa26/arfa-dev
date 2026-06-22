@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ArrowRight } from 'lucide-svelte';
   import Container from '$lib/components/shared/Container.svelte';
   import Tag from '$lib/components/shared/Tag.svelte';
   import type { PageData } from './$types';
@@ -65,6 +66,15 @@
           </div>
         </article>
       {/each}
+    </div>
+    <div class="mt-16 text-center">
+      <a
+        href="/archive"
+        class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors border border-outline-variant/50 rounded-full px-8 py-3 hover:border-secondary"
+      >
+        Portfolio History
+        <ArrowRight size={18} />
+      </a>
     </div>
   </div>
 </Container>
