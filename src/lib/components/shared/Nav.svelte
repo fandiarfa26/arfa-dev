@@ -40,12 +40,10 @@
 
   function open() {
     menuOpen = true;
-    document.body.style.overflow = 'hidden';
   }
 
   function close() {
     menuOpen = false;
-    document.body.style.overflow = '';
   }
 
   function onDrawerKeydown(e: KeyboardEvent) {
@@ -71,6 +69,7 @@
 
   $effect(() => {
     if (menuOpen) {
+      document.body.style.overflow = 'hidden';
       closeBtn?.focus();
       const main = document.getElementById('main-content');
       if (main) main.inert = true;
