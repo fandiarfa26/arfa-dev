@@ -1,4 +1,5 @@
 <script lang="ts">
+  import '$lib/styles/blog.css';
   import { ArrowLeft } from 'lucide-svelte';
   import Container from '$lib/components/shared/Container.svelte';
   import type { PageData } from './$types';
