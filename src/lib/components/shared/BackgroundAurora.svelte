@@ -74,8 +74,7 @@
   onMount(() => {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const raw = getComputedStyle(document.documentElement).getPropertyValue('--color-secondary').trim();
-    if (raw) secondaryRGB = raw.replace(/\s+/g, ', ');
+    // ponytail: --color-secondary is static (16 185 129), no need to read via getComputedStyle
 
     const pointerMQ = window.matchMedia('(pointer: fine)');
     if (!pointerMQ.matches) return;
