@@ -7,7 +7,8 @@ export function animateHeroEntrance(element: HTMLElement) {
   const items = Array.from(element.querySelectorAll('[data-hero-item]')) as HTMLElement[];
 
   items.forEach((child, i) => {
-    child.style.opacity = '0';
+    const isLCP = child.matches('h1, h2');
+    if (!isLCP) child.style.opacity = '0';
     child.style.transform = 'translateY(24px)';
     child.style.transition = `opacity 0.8s ${EASE} ${i * 0.15}s, transform 0.8s ${EASE} ${i * 0.15}s`;
   });

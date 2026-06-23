@@ -17,20 +17,20 @@
   const RADIUS = 280;
   const MAX_SIZE = 2.5;
 
-  function getSpacing() {
-    const w = window.innerWidth;
-    if (w < 480) return 56;
-    if (w < 768) return 44;
+  function getSpacing(w?: number) {
+    const width = w ?? window.innerWidth;
+    if (width < 480) return 56;
+    if (width < 768) return 44;
     return 32;
   }
 
-  function initGrid() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const spacing = getSpacing();
+  function initGrid(w?: number, h?: number) {
+    const width = w ?? window.innerWidth;
+    const height = h ?? window.innerHeight;
+    const spacing = getSpacing(width);
     dots = [];
-    for (let x = spacing; x < w; x += spacing) {
-      for (let y = spacing; y < h; y += spacing) {
+    for (let x = spacing; x < width; x += spacing) {
+      for (let y = spacing; y < height; y += spacing) {
         dots.push({ ox: x, oy: y, size: 0 });
       }
     }
@@ -72,6 +72,8 @@
   }
 
   onMount(() => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     const raw = getComputedStyle(document.documentElement).getPropertyValue('--color-secondary').trim();
     if (raw) secondaryRGB = raw.replace(/\s+/g, ', ');
 
@@ -81,12 +83,12 @@
     const reducedMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reducedMQ.matches) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
     ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    initGrid();
+    initGrid(w, h);
 
     const onMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
@@ -105,10 +107,12 @@
 
     let resizeTimer: ReturnType<typeof setTimeout>;
     const onResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(initGrid, 150);
+      resizeTimer = setTimeout(() => initGrid(w, h), 150);
     };
 
     const onVisibilityChange = () => {

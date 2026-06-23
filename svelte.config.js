@@ -14,7 +14,8 @@ const config = {
   kit: {
     adapter: adapter({
       runtime: 'nodejs22.x'
-    })
+    }),
+    inlineStyleThreshold: 4096
   }
 };
 
