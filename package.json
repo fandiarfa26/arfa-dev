@@ -2,6 +2,11 @@
   "name": "arfa-dev",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fandiarfa26/arfa-dev.git"
+  },
+  "homepage": "https://github.com/fandiarfa26/arfa-dev",
   "type": "module",
   "scripts": {
     "dev": "vite dev",

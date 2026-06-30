@@ -85,6 +85,26 @@ export const projects: Project[] = [
     }
   },
   {
+    title: 'Wedding Invitation',
+    description: 'A private wedding invitation website with invitation code validation for registered guests.',
+    year: '2022',
+    role: 'Frontend Developer',
+    tags: ['React', 'Tailwind CSS', 'Wedding Invitation', 'Frontend'],
+    image: '/images/projects/winvit.webp',
+    situation:
+      'I built this wedding invitation website for my own wedding as a personal side project. Instead of following the common approach where anyone could access an invitation by changing a query parameter, I wanted a more private system that only allowed registered guests to view their invitation.',
+    challenge:
+      'Designing a secure yet simple invitation validation flow while keeping the experience easy for invited guests.',
+    decision:
+      'I replaced the typical name-based query parameter with a unique invitation code and prioritized a straightforward validation flow before displaying the invitation.',
+    outcome:
+      'The website was successfully used during my wedding. Registered guests could access their invitations through the validation process, and the project also served as a practical learning experience in building a more privacy-focused invitation system.',
+    links: {
+      demo: 'https://mithafandi.vercel.app/to/ab12-Seseorang',
+      github: 'https://github.com/fandiarfa26/mithafandi'
+    }
+  },
+  {
     title: 'FoodieMu App',
     description: 'A food delivery platform that connected customers, UMKM partners, drivers, and students who promoted local businesses through an affiliate-based ecosystem.',
     year: '2021–2022',

@@ -30,6 +30,20 @@
                 <Tag>{tag}</Tag>
               {/each}
             </div>
+            <div class="flex flex-wrap gap-4 mt-2">
+              {#if project.links?.demo}
+                <a href={project.links.demo} class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors">
+                  View Live Demo
+                  <ArrowRight size={16} />
+                </a>
+              {/if}
+              {#if project.links?.github}
+                <a href={project.links.github} class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors">
+                  Source
+                  <ArrowRight size={16} />
+                </a>
+              {/if}
+            </div>
           </div>
           <div class="md:col-span-8 flex flex-col gap-6">
             {#if project.image}
