@@ -99,6 +99,10 @@ export const projects: Project[] = [
       'I replaced the typical name-based query parameter with a unique invitation code and prioritized a straightforward validation flow before displaying the invitation.',
     outcome:
       'The website was successfully used during my wedding. Registered guests could access their invitations through the validation process, and the project also served as a practical learning experience in building a more privacy-focused invitation system.',
+    atsHighlights: [
+      'Built a private wedding invitation web application using React and Tailwind CSS.',
+      'Implemented invitation code validation to ensure only registered guests could access the invitation.'
+    ],
     links: {
       demo: 'https://mithafandi.vercel.app/to/ab12-Seseorang',
       github: 'https://github.com/fandiarfa26/mithafandi'
