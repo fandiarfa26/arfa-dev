@@ -62,19 +62,19 @@
             <div class="border border-outline-variant rounded-xl p-8 bg-surface">
               <div class="mb-6">
                 <h3 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Situation</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">{project.situation}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">{project.situation.en}</p>
               </div>
               <div class="mb-6">
                 <h3 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Challenge</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">{project.challenge}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">{project.challenge.en}</p>
               </div>
               <div class="mb-6">
                 <h3 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Decision</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">{project.decision}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">{project.decision.en}</p>
               </div>
               <div>
                 <h3 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Outcome</h3>
-                <p class="font-body-md text-body-md text-on-surface">{project.outcome}</p>
+                <p class="font-body-md text-body-md text-on-surface">{project.outcome.en}</p>
               </div>
             </div>
           </div>

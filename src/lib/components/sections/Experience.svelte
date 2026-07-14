@@ -28,7 +28,7 @@
             </div>
             <h4 class="font-body-lg text-body-lg text-on-surface-variant mb-4 border-b border-outline-variant/30 pb-4">{exp.company}</h4>
             <ul class="flex flex-col gap-4 font-body-md text-body-md text-on-surface mb-6 list-none">
-              {#each exp.highlights as highlight}
+              {#each exp.highlights.en as highlight}
                 <li class="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-secondary before:rounded-full">{highlight}</li>
               {/each}
             </ul>
@@ -36,7 +36,7 @@
               <Lightbulb size={20} class="text-secondary mt-0.5 shrink-0" />
               <div>
                 <span class="font-label-md text-label-md text-secondary uppercase tracking-widest block mb-1">Reflection</span>
-                <p class="font-body-md text-body-md text-on-surface-variant text-sm">{exp.reflection}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant text-sm">{exp.reflection.en}</p>
               </div>
             </div>
           </div>

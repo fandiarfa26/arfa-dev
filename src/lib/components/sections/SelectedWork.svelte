@@ -78,15 +78,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Situation &amp; Role</h4>
-                <p class="font-body-md text-body-md text-on-surface-variant">{project.situation}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">{project.situation.en}</p>
               </div>
               <div>
                 <h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Challenges &amp; Decisions</h4>
-                <p class="font-body-md text-body-md text-on-surface-variant">{project.challenge} {project.decision}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">{project.challenge.en} {project.decision.en}</p>
               </div>
               <div class="md:col-span-2 border-t border-outline-variant/30 pt-4">
                 <h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-2">Outcome</h4>
-                <p class="font-body-md text-body-md text-on-surface">{project.outcome}</p>
+                <p class="font-body-md text-body-md text-on-surface">{project.outcome.en}</p>
               </div>
             </div>
           </div>

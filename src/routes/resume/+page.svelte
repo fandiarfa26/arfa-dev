@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import Container from '$lib/components/shared/Container.svelte';
   import Button from '$lib/components/shared/Button.svelte';
   import { personalInfo, summary, skills, education, languages, experiences, projects } from '$lib/data/resume';
@@ -6,9 +7,25 @@
 
   let { data }: { data: PageData } = $props();
 
+  let lang = $state<'en' | 'id'>('en');
+
+  $effect(() => {
+    if (browser) {
+      const saved = localStorage.getItem('resume-lang');
+      if (saved === 'id' || saved === 'en') lang = saved;
+    }
+  });
+
+  $effect(() => {
+    if (browser) {
+      localStorage.setItem('resume-lang', lang);
+    }
+  });
+
   function triggerPrint() {
     setTimeout(() => window.print(), 300);
   }
+
 </script>
 
 <svelte:head>
@@ -26,13 +43,17 @@
 
     <div class="no-print flex flex-wrap gap-4 mb-10">
       <Button onclick={triggerPrint}>Download CV</Button>
+      <div class="lang-toggle">
+        <button class="lang-btn" class:active={lang === 'en'} onclick={() => lang = 'en'}>EN</button>
+        <button class="lang-btn" class:active={lang === 'id'} onclick={() => lang = 'id'}>ID</button>
+      </div>
     </div>
 
     <div class="card">
       <div class="resume">
         <header>
           <h1 class="cv-name">{personalInfo.name}</h1>
-          <p class="cv-contact">{personalInfo.location}</p>
+          <p class="cv-contact">{personalInfo.location[lang]}</p>
           <p class="cv-contact">
             {personalInfo.email}
             <span class="sep">|</span>
@@ -43,8 +64,8 @@
         </header>
 
         <section>
-          <h2>SUMMARY</h2>
-          <p class="summary">{summary}</p>
+          <h2>{lang === 'id' ? 'RINGKASAN' : 'SUMMARY'}</h2>
+          <p class="summary">{summary[lang]}</p>
         </section>
 
         <section>
@@ -57,7 +78,7 @@
         </section>
 
         <section>
-          <h2>EXPERIENCE</h2>
+          <h2>{lang === 'id' ? 'PENGALAMAN' : 'EXPERIENCE'}</h2>
           {#each experiences as exp}
             <div class="resume-item">
               <div class="item-header">
@@ -66,7 +87,7 @@
                 <p class="period">{exp.period}</p>
               </div>
               <ul>
-                {#each exp.atsHighlights ?? exp.highlights as highlight}
+                {#each (exp.atsHighlights ?? exp.highlights)[lang] as highlight}
                   <li>{highlight}</li>
                 {/each}
               </ul>
@@ -75,7 +96,7 @@
         </section>
 
         <section>
-          <h2>PROJECTS</h2>
+          <h2>{lang === 'id' ? 'PROYEK' : 'PROJECTS'}</h2>
           {#each projects as project}
             <div class="resume-item">
               <div class="item-header">
@@ -87,7 +108,7 @@
               {/if}
               {#if project.atsHighlights}
                 <ul>
-                  {#each project.atsHighlights as highlight}
+                  {#each project.atsHighlights[lang] as highlight}
                     <li>{highlight}</li>
                   {/each}
                 </ul>
@@ -97,18 +118,18 @@
         </section>
 
         <section>
-          <h2>EDUCATION</h2>
+          <h2>{lang === 'id' ? 'PENDIDIKAN' : 'EDUCATION'}</h2>
           {#each education as edu}
             <div class="resume-item">
               <h3>{edu.university}</h3>
-              <p>{edu.degree} <span class="sep">|</span> {edu.period}{#if edu.gpa} <span class="sep">|</span> GPA: {edu.gpa}{/if}</p>
+              <p>{edu.degree[lang]} <span class="sep">|</span> {edu.period}{#if edu.gpa} <span class="sep">|</span> GPA: {edu.gpa}{/if}</p>
             </div>
           {/each}
         </section>
 
         <section>
-          <h2>LANGUAGES</h2>
-          <p>{languages.join(', ')}</p>
+          <h2>{lang === 'id' ? 'BAHASA' : 'LANGUAGES'}</h2>
+          <p>{languages[lang].join(', ')}</p>
         </section>
       </div>
     </div>
@@ -230,6 +251,35 @@
     margin-bottom: 4px;
   }
 
+  .lang-toggle {
+    display: flex;
+    gap: 0;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .lang-btn {
+    padding: 8px 16px;
+    background: transparent;
+    color: #10b981;
+    border: none;
+    cursor: pointer;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .lang-btn:hover {
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .lang-btn.active {
+    background: #10b981;
+    color: #000;
+  }
+
   @media print {
     .card {
       background: none;
@@ -335,6 +385,10 @@
       font-family: Arial, sans-serif;
       color: #000 !important;
       text-decoration: none !important;
+    }
+
+    .lang-toggle {
+      display: none !important;
     }
   }
 </style>
